@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<math.h>
+float f(float x){
+    return x*x*x-4*x-5 ;//can define your own function here
+}
+int bisection(float x1,float x2,float tol,int n){
+    float x,x3;
+    x=(x1+x2)/2.0;
+    printf("\nITERATIONS\t\t\tROOTS\n");
+    int i=1;
+    while(i<=n){
+        if(f(x)*f(x1)<0){
+            x2=x;
+        }
+        else{
+            x1=x;
+        }
+        printf("%d\t\t\t\t%f\t\t\t\t\n",i,x);
+        x3=(x1+x2)/2.0;
+        if(fabs(x3-x)<tol){
+            printf("\nFinal Root after %d Iteration  -------> %f",i,x);
+            return 0;
+        }
+        x=x3;
+        i++;
+    }
+    printf("Final root after %d Iteration-------> %f ",i,x);
+}
+
+int main(){
+    int n;
+    float x1,x2,x,tol,x3;
+    printf("Enter the tolerance\n");
+    scanf("%f",&tol);
+    printf("Enter the value of max Iterations\n");
+    scanf("%d",&n);
+    do{
+        printf("Enter the value of x1\n");
+        scanf("%f",&x1);
+        printf("Enter the value of x2\n");
+        scanf("%f",&x2);
+        if(f(x1)*f(x2)>0){
+            printf("Invalid value of x1 and x2\n");
+            continue;
+        }
+        else{
+            printf("The roots of the equation lies between %.1f and %.1f",x1,x2);
+            break;
+        }
+    }while(1);
+    bisection(x1,x2,tol,n);
+}
