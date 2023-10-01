@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<math.h>
+float f(float x){
+    return x*x*x-2*x-5 ;
+}
+void bisection(float x1,float x2,int n){
+    float x;
+    printf("\nITERATIONS\t\t\tROOTS\n");
+    int i=1;
+    while(i<=n){    
+        x=(x1+x2)/2.0;
+        if(f(x)*f(x1)<0){
+            x2=x;
+        }
+        else{
+            x1=x;
+        }
+        printf("%d\t\t\t\t%f\t\t\t\t\n",i,x);
+        i++;
+    }
+    printf("Final root after %d Iteration-------> %f ",--i,x);
+}
+
+int main(){
+    int n;
+    float x1,x2;
+    printf("Enter the value of max Iterations\n");
+    scanf("%d",&n);
+    do{
+        printf("Enter the value of x1\n");
+        scanf("%f",&x1);
+        printf("Enter the value of x2\n");
+        scanf("%f",&x2);
+        if(f(x1)*f(x2)>0){
+            printf("Invalid value of x1 and x2\n");
+            continue;
+        }
+        else{
+            printf("The roots of the equation lies between %.1f and %.1f",x1,x2);
+            break;
+        }
+    }while(1);
+    bisection(x1,x2,n);
+}
